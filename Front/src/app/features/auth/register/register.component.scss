@@ -1,0 +1,30 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+mat-card {
+  max-width: 400px;
+  width: 100%;
+}
+
+mat-card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+mat-card-title {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+mat-form-field {
+  margin-bottom: 16px;
+}
+
+mat-card-actions {
+  padding-top: 20px;
+}
