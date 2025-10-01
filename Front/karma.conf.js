@@ -14,10 +14,10 @@ module.exports = function (config) {
     ],
     client: {
       jasmine: {
-        // you can add configuration options for Jasmine here
-        // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
-        // for example, you can disable the random execution order
-        // random: false
+        // Configurações do Jasmine
+        random: true,
+        seed: '4321',
+        stopOnFailure: false
       },
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
@@ -29,11 +29,44 @@ module.exports = function (config) {
       subdir: '.',
       reporters: [
         { type: 'html' },
-        { type: 'text-summary' }
-      ]
+        { type: 'text-summary' },
+        { type: 'lcov' },
+        { type: 'clover' }
+      ],
+      check: {
+        global: {
+          statements: 80,
+          branches: 70,
+          functions: 80,
+          lines: 80
+        }
+      }
     },
-    reporters: ['progress', 'kjhtml'],
-    browsers: ['Chrome'],
-    restartOnFileChange: true
+    reporters: ['progress', 'kjhtml', 'coverage'],
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_INFO,
+    autoWatch: true,
+    browsers: ['Chrome', 'ChromeHeadless'],
+    singleRun: false,
+    restartOnFileChange: true,
+    customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: [
+          '--no-sandbox',
+          '--disable-web-security',
+          '--disable-gpu',
+          '--remote-debugging-port=9222'
+        ]
+      }
+    }
   });
+
+  // Para CI/CD
+  if (process.env.CI) {
+    config.browsers = ['ChromeHeadlessCI'];
+    config.singleRun = true;
+    config.autoWatch = false;
+  }
 };
