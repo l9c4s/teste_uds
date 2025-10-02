@@ -61,10 +61,10 @@ docker-compose up --build -d
 
 ## se por algum destino que deus quiz na hora de logar der usuario e senha incorretos.
 
-1 - Rode o teste no backand 'HashPassword_ShouldGenerateValidHash'
-2 - pegue o valor do hash gerado no output do teste
-3 - Conecte no banco de dados e execute o update
-4 - UPDATE Users SET PasswordHash = 'hash do output do teste' WHERE Id = 1;
+ - 1 - Rode o teste no backand 'HashPassword_ShouldGenerateValidHash'
+ - 2 - pegue o valor do hash gerado no output do teste
+ - 3 - Conecte no banco de dados e execute o update
+ - 4 - UPDATE Users SET PasswordHash = 'hash do output do teste' WHERE Id = 1;
 
 
 
