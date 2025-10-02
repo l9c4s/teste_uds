@@ -1,0 +1,58 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+  background-color: #fafafa;
+  border-right: 1px solid #e0e0e0;
+}
+
+.sidebar-header {
+  background-color: #1976d2;
+  color: white;
+  font-weight: 500;
+}
+
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 15px;
+}
+
+.user-name {
+  font-size: 14px;
+  color: white;
+}
+
+.role-chip {
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.main-content {
+  padding: 20px;
+  background-color: #f5f5f5;
+  min-height: calc(100vh - 64px);
+}
+
+.mat-mdc-list-item.active {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.mat-mdc-list-item.active .mat-icon {
+  color: #1976d2;
+}

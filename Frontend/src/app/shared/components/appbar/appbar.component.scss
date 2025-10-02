@@ -1,0 +1,52 @@
+.appbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.menu-button {
+  margin-right: 16px;
+}
+
+.app-title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 16px;
+}
+
+.user-name {
+  font-size: 14px;
+  color: white;
+  font-weight: 500;
+}
+
+.role-chip {
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.user-menu-button {
+  margin-left: 8px;
+}
+
+@media (max-width: 768px) {
+  .user-name {
+    display: none;
+  }
+  
+  .app-title {
+    font-size: 16px;
+  }
+}

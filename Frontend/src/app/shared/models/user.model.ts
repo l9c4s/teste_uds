@@ -1,27 +1,25 @@
 import { AccessLevel } from './access-level.model';
 
 export interface User {
-  id: string;
+  id: number;
   name: string;
   email: string;
-  accessLevel: {
-    id: string;
-    name: string;
-    description: string;
-  };
-  createdAt: Date;
-  updatedAt: Date;
+  accessLevel?: AccessLevel;
+  createdAt: string;
+  updatedAt: string;
 }
+
 
 export interface CreateUserRequest {
   name: string;
   email: string;
   password: string;
-  accessLevelId: string;
+  accessLevelId: number;
 }
 
 export interface UpdateUserRequest {
   name?: string;
   email?: string;
-  accessLevelId?: string;
+  password?: string;
+  accessLevelId?: number;
 }

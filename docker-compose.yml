@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Banco de dados MariaDB
   database:
@@ -25,6 +23,57 @@ services:
       retries: 5
       interval: 30s
       start_period: 30s
+
+
+  api:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    container_name: usermanagement_api
+    restart: always
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=database;Port=3306;Database=usersdb;Uid=apiuser;Pwd=apipassword;
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - JwtSettings__SecretKey=SuperSecretKeyForProductionUse123456789012345678901234567890
+      - JwtSettings__Issuer=UserManagementApi
+      - JwtSettings__Audience=UserManagementClient
+      - JwtSettings__ExpirationHours=24
+    ports:
+      - "5252:8080"
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health" ]
+      timeout: 10s
+      retries: 3
+      interval: 30s
+      start_period: 40s
+
+  # Frontend Angular
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    container_name: usermanagement_frontend
+    restart: always
+    volumes:
+      - ./Frontend:/app
+    environment:
+      - API_URL=http://localhost:5252/api
+      - NODE_ENV=production
+    ports:
+      - "3000:4200"
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      timeout: 10s
+      retries: 3
+      interval: 30s
 
 
 volumes:

@@ -1,30 +1,87 @@
-.form-container {
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background: linear-gradient(135deg, #ececec 0%, #6516b4 100%);
   padding: 20px;
 }
 
-mat-card {
-  max-width: 400px;
+.login-card {
   width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 1);
 }
 
-mat-card-header {
+.login-card mat-card-header {
   text-align: center;
-  margin-bottom: 20px;
+  padding-bottom: 26px;
 }
 
-mat-card-title {
+.login-card mat-card-title {
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
+  color: #0e0a0a;
 }
 
-mat-form-field {
+.login-card mat-card-subtitle {
+  color: #000000;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
   margin-bottom: 16px;
 }
 
+.login-button {
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 16px;
+  border: 1px solid #000000;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ececec 0%, #6516b4 100%);
+  color: #000000;
+  transition: background 0.3s, color 0.3s;
+}
+.login-button:hover {
+  background: linear-gradient(135deg, #6516b4 0%, #ececec 100%);
+  color: #ffffff;
+}
+
+.login-button mat-spinner {
+  margin-right: 8px;
+  color: rgb(0, 0, 0);
+
+}
+
 mat-card-actions {
-  padding-top: 20px;
+  padding-top: 16px;
+}
+
+
+::ng-deep .success-snackbar {
+  background-color: #4caf50 !important;
+  color: white !important;
+}
+
+::ng-deep .error-snackbar {
+  background-color: #f44336 !important;
+  color: white !important;
+}
+
+input {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+input::placeholder {
+  color: #00e5ff !important; 
 }

@@ -10,24 +10,28 @@ COPY ["src/UserManagement.Infrastructure/UserManagement.Infrastructure.csproj", 
 
 RUN dotnet restore "src/UserManagement.Api/UserManagement.Api.csproj"
 
-# Copy everything else and build
+# Copy source code
 COPY . .
 WORKDIR "/src/src/UserManagement.Api"
-RUN dotnet build "UserManagement.Api.csproj" -c Release -o /app/build
 
-# Publish stage
-FROM build AS publish
+# Build and publish
+RUN dotnet build "UserManagement.Api.csproj" -c Release -o /app/build
 RUN dotnet publish "UserManagement.Api.csproj" -c Release -o /app/publish
 
 # Runtime stage
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
-EXPOSE 8080
-COPY --from=publish /app/publish .
 
-# Install wait-for-it script for database dependency
-RUN apt-get update && apt-get install -y wget && \
-    wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
-    chmod +x wait-for-it.sh
+# Install curl for health checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# Copy published app
+COPY --from=build /app/publish .
+
+# Create non-root user
+RUN adduser --disabled-password --gecos '' appuser && chown -R appuser /app
+USER appuser
+
+EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "UserManagement.Api.dll"]
