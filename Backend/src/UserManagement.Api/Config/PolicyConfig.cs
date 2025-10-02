@@ -52,7 +52,7 @@ public class MinimumAccessLevelHandler : AuthorizationHandler<MinimumAccessLevel
         {
             "Administrator" => AccessLevel.Administrator,
             "Manager" => AccessLevel.Manager,
-            "User" => AccessLevel.CommonUser,
+            "User" => AccessLevel.Common,
             "Viewer" => AccessLevel.Viewer,
             _ => null
         };

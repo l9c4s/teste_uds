@@ -40,7 +40,7 @@ public static class AuthConfig
                    // Um usuário Admin (nível 1) passará na política "CommonUser" (nível 6), pois 1 <= 6.
                    options.AddPolicy(nameof(AccessLevel.Administrator), policy => policy.AddRequirements(new MinimumAccessLevelRequirement(AccessLevel.Administrator)));
                    options.AddPolicy(nameof(AccessLevel.Manager), policy => policy.AddRequirements(new MinimumAccessLevelRequirement(AccessLevel.Manager)));
-                   options.AddPolicy(nameof(AccessLevel.CommonUser), policy => policy.AddRequirements(new MinimumAccessLevelRequirement(AccessLevel.CommonUser)));
+                   options.AddPolicy(nameof(AccessLevel.Common), policy => policy.AddRequirements(new MinimumAccessLevelRequirement(AccessLevel.Common)));
                    options.AddPolicy(nameof(AccessLevel.Viewer), policy => policy.AddRequirements(new MinimumAccessLevelRequirement(AccessLevel.Viewer)));
                });
 

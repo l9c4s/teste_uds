@@ -60,13 +60,10 @@ services:
       dockerfile: Dockerfile
     container_name: usermanagement_frontend
     restart: always
-    volumes:
-      - ./Frontend:/app
     environment:
       - API_URL=http://localhost:5252/api
-      - NODE_ENV=production
     ports:
-      - "3000:4200"
+      - "3000:80"
     networks:
       - app_network
     healthcheck:
@@ -74,6 +71,7 @@ services:
       timeout: 10s
       retries: 3
       interval: 30s
+      start_period: 30s
 
 
 volumes:
