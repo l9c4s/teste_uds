@@ -1,0 +1,100 @@
+<div class="create-user-modal">
+
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <h2 mat-dialog-title>
+      <mat-icon>person_add</mat-icon>
+      Criar Novo Usuário
+    </h2>
+    <button mat-icon-button (click)="onCancel()" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Modal Content -->
+  <div mat-dialog-content class="modal-content">
+
+    <div *ngIf="apiError" class="api-error-container">
+      <mat-icon>error</mat-icon>
+      <span>{{ apiError }}</span>
+      <button mat-icon-button (click)="apiError = ''" class="close-error">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" (ngModelChange)="onFormChange()">
+
+      <!-- Name Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome completo</mat-label>
+        <input matInput 
+               formControlName="name" 
+               placeholder="Digite o nome completo"
+               (input)="onFormChange()">
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+          {{ getFieldErrorMessage('name') }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Email Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput 
+               type="email" 
+               formControlName="email" 
+               placeholder="usuario@exemplo.com"
+               (input)="onFormChange()">
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+          {{ getFieldErrorMessage('email') }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Password Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Senha</mat-label>
+        <input matInput 
+               [type]="hidePassword ? 'password' : 'text'" 
+               formControlName="password"
+               placeholder="Digite a senha"
+               (input)="onFormChange()">
+        <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+          <mat-icon>{{ hidePassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+          {{ getFieldErrorMessage('password') }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Access Level Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nível de acesso</mat-label>
+        <mat-select formControlName="accessLevel" (selectionChange)="onFormChange()">
+          <mat-option *ngFor="let level of accessLevels" [value]="level.value">
+            {{ level.label }}
+          </mat-option>
+        </mat-select>
+        <mat-icon matSuffix>admin_panel_settings</mat-icon>
+        <mat-error *ngIf="userForm.get('accessLevel')?.invalid && userForm.get('accessLevel')?.touched">
+          {{ getFieldErrorMessage('accessLevel') }}
+        </mat-error>
+      </mat-form-field>
+
+    </form>
+  </div>
+
+  <!-- Modal Actions -->
+  <div mat-dialog-actions class="modal-actions">
+    <button mat-button type="button" (click)="onCancel()" [disabled]="isLoading">
+      Cancelar
+    </button>
+
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="userForm.invalid || isLoading">
+      <mat-icon *ngIf="isLoading">refresh</mat-icon>
+      <mat-icon *ngIf="!isLoading">save</mat-icon>
+      {{ isLoading ? 'Salvando...' : 'Criar Usuário' }}
+    </button>
+  </div>
+
+</div>

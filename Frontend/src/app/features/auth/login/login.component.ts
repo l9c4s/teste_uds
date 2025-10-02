@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../../../core/services/auth.service';
-import { LoginRequest } from '../../../shared/models/auth.model';
+import { LoginRequest } from '../../../shared/models/Auth/auth.model';
 
 @Component({
   selector: 'app-login',
@@ -56,7 +56,7 @@ export class LoginComponent {
             duration: 3000,
             panelClass: ['success-snackbar']
           });
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/uds']);
         },
         error: (error) => {
           this.isLoading = false;

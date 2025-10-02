@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { AccessLevel } from '../../shared/models/access-control.model';
+import { AccessLevel } from '../../shared/enums/AccessLevel';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class ManagerGuard implements CanActivate {
   ) {}
 
   canActivate(): boolean {
-    if (this.authService.isAuthenticated() && this.authService.hasMinimumRole(AccessLevel.MANAGER)) {
+    if (this.authService.isAuthenticated() && this.authService.minimumPermission(AccessLevel.MANAGER)) {
       return true;
     } else {
       this.router.navigate(['/unauthorized']);

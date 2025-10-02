@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 import { AppbarComponent } from '../appbar/appbar.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-layout',
@@ -11,29 +10,24 @@ import { AppbarComponent } from '../appbar/appbar.component';
   imports: [
     CommonModule,
     RouterOutlet,
-    MatSidenavModule,
-    SidebarComponent,
-    AppbarComponent
+    AppbarComponent,
+    SidebarComponent
   ],
-  template: `
-    <mat-sidenav-container class="layout-container">
-      <!-- Sidebar -->
-      <mat-sidenav #drawer class="sidenav" fixedInViewport mode="side" opened>
-        <app-sidebar></app-sidebar>
-      </mat-sidenav>
-
-      <!-- Main Content -->
-      <mat-sidenav-content>
-        <!-- Top App Bar -->
-        <app-appbar (toggleSidebar)="drawer.toggle()"></app-appbar>
-        
-        <!-- Feature Content -->
-        <main class="main-content">
-          <router-outlet></router-outlet>
-        </main>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  `,
+  templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+  
+  sidebarOpen = true; // Por padrão, sidebar aberto
+
+  onToggleSidebar(): void {
+    console.log('Toggle sidebar called, current state:', this.sidebarOpen); // Debug
+    this.sidebarOpen = !this.sidebarOpen;
+    console.log('New state:', this.sidebarOpen); // Debug
+  }
+
+  onCloseSidebar(): void {
+    console.log('Close sidebar called'); // Debug
+    this.sidebarOpen = false;
+  }
+}

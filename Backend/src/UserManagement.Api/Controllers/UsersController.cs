@@ -23,7 +23,7 @@ public class UsersController : ControllerBase
     /// Get all users
     /// </summary>
     [HttpGet]
-    [Authorize(Policy = nameof(AccessLevel.CommonUser))]
+    [Authorize(Policy = nameof(AccessLevel.Common))]
     public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
     {
         var users = await _mediator.Send(new GetUsersQuery());
@@ -34,7 +34,7 @@ public class UsersController : ControllerBase
     /// Get user by ID
     /// </summary>
     [HttpGet("{id}")]
-    [Authorize(Policy = nameof(AccessLevel.CommonUser))]
+    [Authorize(Policy = nameof(AccessLevel.Common))]
     public async Task<ActionResult<UserDto>> GetUser(int id)
     {
         var user = await _mediator.Send(new GetUserByIdQuery(id));

@@ -1,0 +1,53 @@
+<mat-toolbar color="primary" class="appbar">
+  
+  <!-- Menu Toggle Button -->
+  <button 
+    mat-icon-button 
+    (click)="onToggleSidebar()" 
+    class="menu-button"
+    aria-label="Toggle sidebar menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  
+  <!-- App Title -->
+  <span class="app-title">
+    Sistema de Gerenciamento de Usuários
+  </span>
+  
+  <!-- Spacer para empurrar elementos para a direita -->
+  <span class="spacer"></span>
+  
+  <!-- User Information Section -->
+  <div *ngIf="currentUser" class="user-info">
+    <span class="user-name">
+      {{ currentUser.name }}
+    </span>
+    
+    <mat-chip 
+      [color]="getRoleChipColor(currentUser.name || '')" 
+      class="role-chip">
+      {{ currentUser.accessLevel }}
+    </mat-chip>
+  </div>
+  
+  <!-- User Menu Button -->
+  <button 
+    mat-icon-button 
+    [matMenuTriggerFor]="userMenu" 
+    class="user-menu-button"
+    aria-label="User menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  
+  <!-- User Dropdown Menu -->
+  <mat-menu #userMenu="matMenu">
+    
+    <!-- Logout Option -->
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Sair</span>
+    </button>
+    
+  </mat-menu>
+  
+</mat-toolbar>

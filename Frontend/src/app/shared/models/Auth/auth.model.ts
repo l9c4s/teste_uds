@@ -1,10 +1,10 @@
-import { AccessLevel } from './access-level.model';
+import { AccessLevel } from '../../enums/AccessLevel';
 
 export interface AuthUser {
   id: number;
   name: string;
   email: string;
-  accessLevel?: AccessLevel;
+  accessLevel:  AccessLevel;
   createdAt: string;
   updatedAt: string;
 }
@@ -13,6 +13,7 @@ export interface LoginRequest {
   email: string;
   password: string;
 }
+
 
 export interface RegisterRequest {
   name: string;

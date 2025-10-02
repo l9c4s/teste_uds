@@ -1,7 +1,8 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
-import { Permission, AccessLevel } from '../models/access-control.model';
+import { Permission} from '../models/access-control.model';
+import { AccessLevel } from '../enums/AccessLevel';
 
 @Directive({
   selector: '[appHasPermission]',
@@ -10,7 +11,7 @@ import { Permission, AccessLevel } from '../models/access-control.model';
 export class HasPermissionDirective implements OnInit, OnDestroy {
   private subscription = new Subscription();
   private currentPermission: keyof Permission | null = null;
-  private currentMinRole: AccessLevel | null = null;
+  private currentMinRole: AccessLevel = AccessLevel.MANAGER;
 
   @Input() set appHasPermission(permission: keyof Permission) {
     this.currentPermission = permission;
@@ -29,7 +30,7 @@ export class HasPermissionDirective implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Observar mudanças no usuário atual
+    // Observar mudanças no usuário atual, canhao faca da cintura 
     this.subscription.add(
       this.authService.currentUser$.subscribe(() => {
         this.updateView();
@@ -48,13 +49,9 @@ export class HasPermissionDirective implements OnInit, OnDestroy {
 
     // Verificar por permissão específica
     if (this.currentPermission) {
-      hasAccess = this.authService.hasPermission(this.currentPermission);
+      hasAccess = this.authService.minimumPermission(this.currentMinRole);
     }
-    // Verificar por nível mínimo
-    else if (this.currentMinRole) {
-      hasAccess = this.authService.hasMinimumRole(this.currentMinRole);
-    }
-
+    
     if (hasAccess) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     }

@@ -1,0 +1,21 @@
+<div class="layout-container">
+  
+  <!-- AppBar (Barra superior) -->
+  <app-appbar (toggleSidebar)="onToggleSidebar()"></app-appbar>
+  
+  <div class="layout-body">
+    
+    <!-- Sidebar (Menu lateral esquerdo) -->
+    <app-sidebar 
+      [isOpen]="sidebarOpen"
+      (closeSidebar)="onCloseSidebar()">
+    </app-sidebar>
+    
+    <!-- Main Content (Conteúdo principal) -->
+    <main class="main-content" [class.sidebar-closed]="!sidebarOpen">
+      <router-outlet></router-outlet>
+    </main>
+    
+  </div>
+  
+</div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { User, CreateUserRequest, UpdateUserRequest } from '../../shared/models/user.model';
+import { User, CreateUserRequest, UpdateUserRequest } from '../../shared/models/Users/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,14 +21,16 @@ export class UserService {
   }
 
   createUser(user: CreateUserRequest): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/users`, user);
+    return this.http.post<User>(`${this.apiUrl}/users/register`, user);
   }
 
+  /* nao foi solicitado update nem delete, Port MALLONE ROCKSTAR
   updateUser(id: string, user: UpdateUserRequest): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/users/${id}`, user);
   }
 
-  deleteUser(id: string): Observable<void> {
+  deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/users/${id}`);
   }
+  */
 }

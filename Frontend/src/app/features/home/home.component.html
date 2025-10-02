@@ -1,0 +1,72 @@
+<div class="home-container">
+  
+  <!-- Welcome Section -->
+  <section class="welcome-section ">
+    <mat-card class="welcome-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>home</mat-icon>
+          Bem-vindo ao Sistema
+        </mat-card-title>
+        <mat-card-subtitle *ngIf="currentUser">
+          Olá, {{ currentUser.name }}!
+        </mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <p>Sistema de Gerenciamento de Usuários</p>
+        <p class="user-role" *ngIf="currentUser">
+          Seu nível de acesso: 
+          <strong>{{ currentUser.accessLevel || 'N/A' }}</strong>
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- Statistics Cards -->
+  <section class="stats-section" *ngIf="isAdmin()">
+    <div class="stats-grid">
+      
+      <!-- Total Users Card -->
+      <mat-card class="stat-card users-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>people</mat-icon>
+            Total de Usuários
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-number">{{ getTotalUsers() }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Total Admins Card -->
+      <mat-card class="stat-card admins-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>admin_panel_settings</mat-icon>
+            Administradores
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-number">{{ getTotalAdmins() }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Total Managers Card -->
+      <mat-card class="stat-card managers-card">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>manage_accounts</mat-icon>
+            Gerentes
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-number">{{ getTotalManagers() }}</div>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,149 @@
+.create-user-modal {
+  width: 100%;
+  max-width: 500px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 0;
+  margin-bottom: 16px;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .close-button {
+    color: #666;
+
+    &:hover {
+      color: #333;
+    }
+  }
+}
+
+.modal-content {
+  padding: 0 24px;
+  max-height: 60vh;
+  overflow-y: auto;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+// API Error Container
+.api-error-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  background-color: #ffebee;
+  border: 1px solid #f44336;
+  border-radius: 8px;
+  color: #d32f2f;
+
+  mat-icon {
+    color: #d32f2f;
+    font-size: 20px;
+  }
+
+  span {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .close-error {
+    width: 24px;
+    height: 24px;
+    color: #d32f2f;
+
+    mat-icon {
+      font-size: 16px;
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 20px 24px;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 20px;
+
+  button {
+    min-width: 120px;
+    height: 40px;
+
+    mat-icon {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+  }
+}
+
+// Form field customization
+mat-form-field {
+  .mat-mdc-text-field-wrapper {
+    background-color: #fafafa;
+    border-radius: 8px;
+  }
+
+  .mdc-text-field--focused .mat-mdc-text-field-wrapper {
+    background-color: #ffffff;
+  }
+}
+
+input {
+  border-radius: 8px !important;
+  text-align: left !important;
+  padding-left: 12px !important;
+}
+
+input::placeholder {
+  color: #5a2626 !important;
+}
+
+// Responsive
+@media (max-width: 600px) {
+  .create-user-modal {
+    max-width: 90vw;
+  }
+
+  .modal-header {
+    padding: 16px 20px 0;
+
+    h2 {
+      font-size: 20px;
+    }
+  }
+
+  .modal-content {
+    padding: 0 20px;
+  }
+
+  .modal-actions {
+    padding: 16px 20px;
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}

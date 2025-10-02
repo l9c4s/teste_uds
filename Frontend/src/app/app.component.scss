@@ -1,0 +1,21 @@
+// styles.scss
+.success-snackbar {
+  background-color: #4caf50 !important;
+  color: white !important;
+  z-index: 9999 !important; // Z-index maior que o modal
+}
+
+.error-snackbar {
+  background-color: #f44336 !important;
+  color: white !important;
+  z-index: 9999 !important; // Z-index maior que o modal
+}
+
+// Força o z-index do container do snackbar
+.cdk-overlay-container {
+  .cdk-overlay-pane {
+    .mat-mdc-snack-bar-container {
+      z-index: 9999 !important;
+    }
+  }
+}

@@ -1,10 +1,9 @@
-import { AccessLevel } from './access-level.model';
 
 export interface User {
   id: number;
   name: string;
   email: string;
-  accessLevel?: AccessLevel;
+  accessLevel: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -18,6 +17,7 @@ export interface CreateUserRequest {
 }
 
 export interface UpdateUserRequest {
+  id: number;
   name?: string;
   email?: string;
   password?: string;

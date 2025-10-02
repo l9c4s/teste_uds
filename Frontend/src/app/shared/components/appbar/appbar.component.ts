@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatChipsModule } from '@angular/material/chips';
 import { AuthService } from '../../../core/services/auth.service';
-import { AuthUser } from '../../models/auth.model';
+import { AuthUser } from '../../models/Auth/auth.model';
 
 @Component({
   selector: 'app-appbar',
@@ -20,49 +20,11 @@ import { AuthUser } from '../../models/auth.model';
     MatMenuModule,
     MatChipsModule
   ],
-  template: `
-    <mat-toolbar color="primary" class="appbar">
-      <!-- Menu Toggle Button -->
-      <button mat-icon-button (click)="onToggleSidebar()" class="menu-button">
-        <mat-icon>menu</mat-icon>
-      </button>
-      
-      <!-- App Title -->
-      <span class="app-title">Sistema de Gerenciamento de Usuários</span>
-      <span class="spacer"></span>
-      
-      <!-- User Info -->
-      <div *ngIf="currentUser" class="user-info">
-        <span class="user-name">{{ currentUser.name }}</span>
-        <mat-chip [color]="getRoleChipColor(currentUser.accessLevel?.name || '')" class="role-chip">
-          {{ currentUser.accessLevel?.name || 'N/A' }}
-        </mat-chip>
-      </div>
-      
-      <!-- User Menu -->
-      <button mat-icon-button [matMenuTriggerFor]="userMenu" class="user-menu-button">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-      
-      <mat-menu #userMenu="matMenu">
-        <button mat-menu-item (click)="goToProfile()">
-          <mat-icon>person</mat-icon>
-          <span>Meu Perfil</span>
-        </button>
-        <button mat-menu-item (click)="goToSettings()">
-          <mat-icon>settings</mat-icon>
-          <span>Configurações</span>
-        </button>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>logout</mat-icon>
-          <span>Sair</span>
-        </button>
-      </mat-menu>
-    </mat-toolbar>
-  `,
+  templateUrl: './appbar.component.html', // Mudança aqui: template inline → templateUrl
   styleUrls: ['./appbar.component.scss']
 })
 export class AppbarComponent implements OnInit {
+
   @Output() toggleSidebar = new EventEmitter<void>();
   
   currentUser: AuthUser | null = null;
@@ -89,14 +51,6 @@ export class AppbarComponent implements OnInit {
       case 'user': return 'primary';
       default: return '';
     }
-  }
-
-  goToProfile(): void {
-    this.router.navigate(['/dashboard/profile']);
-  }
-
-  goToSettings(): void {
-    this.router.navigate(['/dashboard/settings']);
   }
 
   logout(): void {

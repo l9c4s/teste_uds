@@ -1,0 +1,117 @@
+.home-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome-section {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-card {
+  .mat-card-header {
+    .mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+    }
+  }
+
+  .user-role {
+    margin-top: 16px;
+    font-size: 16px;
+    
+    strong {
+      color: #1976d2;
+    }
+  }
+}
+
+.stats-section {
+  margin-bottom: 32px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.stat-card {
+  text-align: center;
+  
+  .mat-card-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 18px;
+  }
+
+  .stat-number {
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 16px;
+  }
+
+  &.users-card .stat-number {
+    color: #1976d2;
+  }
+
+  &.admins-card .stat-number {
+    color: #f44336;
+  }
+
+  &.managers-card .stat-number {
+    color: #ff9800;
+  }
+}
+
+.actions-section {
+  margin-bottom: 32px;
+}
+
+.actions-card {
+  .mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+
+  button {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 16px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card .stat-number {
+    font-size: 36px;
+  }
+}

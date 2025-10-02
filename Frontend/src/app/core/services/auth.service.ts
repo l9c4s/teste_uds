@@ -4,14 +4,15 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { AuthResponse, LoginRequest, AuthUser } from '../../shared/models/auth.model'; // Atualizado
+import { AuthResponse, LoginRequest, AuthUser } from '../../shared/models/Auth/auth.model'; 
+import { AccessLevel } from '../../shared/enums/AccessLevel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly API_URL = environment.apiUrl;
-  private currentUserSubject = new BehaviorSubject<AuthUser | null>(null); // Atualizado
+  private currentUserSubject = new BehaviorSubject<AuthUser | null>(null); 
   public currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(
@@ -67,9 +68,31 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+
+  minimumPermission(requiredLevel: AccessLevel): boolean {
+    const currentUser = this.currentUserSubject.value;
+
+    if (!currentUser) {
+      return false;
+    }
+    const hierarchy: { [key in AccessLevel]: number } = {
+      [AccessLevel.ADMINISTRATOR]: 4,
+      [AccessLevel.MANAGER]: 3,
+      [AccessLevel.COMMON_USER]: 2,
+      [AccessLevel.VIEWER]: 1
+    };
+
+    const userLevel = hierarchy[currentUser.accessLevel];
+    const minimumLevel = hierarchy[requiredLevel];
+
+    // Retorna true se o nível do usuário for maior ou igual ao mínimo exigido
+    return userLevel >= minimumLevel;
+  }
+
   getCurrentUser(): AuthUser | null { // Atualizado
     return this.currentUserSubject.value;
   }
+
 
   private isTokenExpired(token: string): boolean {
     try {
